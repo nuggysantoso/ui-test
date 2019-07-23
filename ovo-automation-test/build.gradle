@@ -1,0 +1,43 @@
+plugins {
+    id 'io.qameta.allure' version '2.5' // Latest Plugin Version
+    id 'java'
+}
+
+allure {
+    autoconfigure = true
+    version = '2.7.0'  // Latest Allure Version
+
+//    resultsDir = file("$buildDir/allure-results")
+//    reportDir = file("$buildDir/allure-report")
+
+    clean = true
+
+    useTestNG {
+        version = '2.0-BETA12'
+    }
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'io.appium', name: 'java-client', version: '4.1.2'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.53.0'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version: '2.53.0'
+    compile group: 'org.testng', name: 'testng', version: '6.9.9'
+}
+
+test {
+    useTestNG() {
+        suites 'src/test/resources/testng.xml'
+    }
+}
+
+clean {
+    delete "$projectDir/Screenshots"
+}
